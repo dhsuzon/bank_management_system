@@ -137,6 +137,9 @@ USE_I18N = True
 
 USE_TZ = True
 
+CSRF_COOKIE_SECURE = True
+
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
@@ -158,4 +161,10 @@ EMAIL_USE_TLS = True
 EMAIL_PORT=587
 EMAIL_HOST_USER=env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD=env('EMAIL_HOST_PASSWORD')
-CSRF_TRUSTED_ORIGINS = [' https://bank-management-system-ihx0.onrender.com']
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://bank-management-system-ihx0.onrender.com',
+    'http://bank-management-system-ihx0.onrender.com',
+]
+
