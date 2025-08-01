@@ -15,13 +15,15 @@ from pathlib import Path
 import dj_database_url
 import environ
 import os
-env = environ.Env()
-environ.Env.read_env()
-...
-# Your secret key
-SECRET_KEY = env("SECRET_KEY")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR,".env"))
+...
+# Your secret key
+SECRET_KEY = env("SECURITY_KEY")
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -86,24 +88,25 @@ WSGI_APPLICATION = 'mamar_bank.wsgi.application'
 
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE':'django.db.backends.postgresql',
-#         'NAME':env("DB_NAME"),
-#         'USER':env("DB_USER"),
-#         'PASSWORD':env("DB_PASSWORD"),
-#         'HOST':env("DB_HOST"),
-#         'PORT':env("DB_PORT"),
-#     }
-# }
-
 DATABASES = {
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://mamarbank_451i_user:QreejNRNXsXIN5Ol36IMZzu33Qsn3MN9@dpg-csr9q1rtq21c73d0ddgg-a.oregon-postgres.render.com/mamarbank_451i',
-       
-    )
+    'default': {
+        'ENGINE':'django.db.backends.postgresql',
+        'NAME':env("DB_NAME"),
+        'USER':env("DB_USER"),
+        'PASSWORD':env("DB_PASSWORD"),
+        'HOST':env("DB_HOST"),
+        'PORT':env("DB_PORT"),
+    }
 }
+
+
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         # Replace this value with your local database's connection string.
+#         default='postgresql://mamarbank_451i_user:QreejNRNXsXIN5Ol36IMZzu33Qsn3MN9@dpg-csr9q1rtq21c73d0ddgg-a.oregon-postgres.render.com/mamarbank_451i',
+       
+#     )
+# }
 
 
 
@@ -146,10 +149,10 @@ CSRF_COOKIE_SECURE = True
 
 STATIC_URL = 'static/'
 
-STATICFIELD_DIRS = [
-    BASE_DIR /'static',
+STATICFILES_DIRS = [
+    BASE_DIR /'core'/'static',
 ]
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -163,8 +166,8 @@ EMAIL_HOST_USER=env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD=env('EMAIL_HOST_PASSWORD')
 
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://bank-management-system-ihx0.onrender.com',
-    'http://bank-management-system-ihx0.onrender.com',
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     'https://bank-management-system-ihx0.onrender.com',
+#     'http://bank-management-system-ihx0.onrender.com',
+# ]
 
