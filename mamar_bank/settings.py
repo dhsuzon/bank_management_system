@@ -101,7 +101,7 @@ WSGI_APPLICATION = 'mamar_bank.wsgi.application'
 # }
 
 
-# Database সেকশনটি এভাবে আপডেট করুন
+
 DATABASES = {
     'default': dj_database_url.config(
      
